@@ -1,7 +1,32 @@
+import { useState } from "react";
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/auth/logout", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        credentials: "include",
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+      const data = await response.json();
+      console.log(data.message);
+
+      localStorage.removeItem("user");
+      navigate("/");
+    } catch (error) {
+      console.error(error.message);
+      setError(errosr.message);
+    }
+  };
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
       {/* Details Section */}
@@ -11,7 +36,7 @@ function ProfilePage() {
             <h1 className="text-2xl font-semibold text-gray-800">
               User Information
             </h1>
-            <button className="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition">
+            <button className="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-300">
               Update Profile
             </button>
           </div>
@@ -30,6 +55,12 @@ function ProfilePage() {
             <p>
               <span className="font-medium">E-mail:</span> <b>john@gmail.com</b>
             </p>
+            <button
+              className="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-300"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </div>
 
@@ -37,7 +68,7 @@ function ProfilePage() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold text-gray-800">My List</h1>
-            <button className="px-4 py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition">
+            <button className="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-300">
               Create New Post
             </button>
           </div>

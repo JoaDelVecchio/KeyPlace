@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import ErrorMessage from "../../components/errorMessage/ErrorMessage";
 
 function Register() {
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -18,14 +22,15 @@ function Register() {
         body: JSON.stringify(newUser),
       });
       const data = await response.json();
+
       if (!response.ok) {
-        const error = data.message;
-        throw new Error(error);
+        throw new Error(data.message);
       }
 
-      console.log(data.message);
+      navigate("/login");
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
+      setError(error.message);
     }
   };
 
@@ -64,6 +69,7 @@ function Register() {
           >
             Register
           </button>
+          {error && <ErrorMessage error={error} />}
           <Link
             to="/login"
             className="block text-center text-sm text-blue-500 hover:underline"
