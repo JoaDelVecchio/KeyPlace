@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    "baseUrl": "./",
+    "target": "ES2022", // Use modern JavaScript features
+    "module": "commonjs", // For Node.js compatibility
+    "strict": true, // Enable strict type-checking
+    "esModuleInterop": true, // Allow default imports from CommonJS modules
+    "forceConsistentCasingInFileNames": true, // Enforce consistent import casing
+    "typeRoots": ["./node_modules/@types", "./src/types"], // Include custom type definitions
+    "baseUrl": "./", // Base path for module resolution
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"] // Alias for cleaner imports
     },
-    "outDir": "./dist",
-    "skipLibCheck": true
+    "types": ["node"],
+    "outDir": "./dist", // Directory for compiled output
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "allowSyntheticDefaultImports": true, // Allow default imports
+    "resolveJsonModule": true, // Enable importing JSON files
+    "moduleResolution": "node", // Use Node.js module resolution
+    "allowJs": true, // Allow JavaScript files
+    "declaration": true, // Generate `.d.ts` files for TypeScript
+    "declarationMap": true // Generate source maps for `.d.ts` files
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"], // Include all TypeScript files in src
+  "exclude": ["node_modules", "dist"] // Exclude build and dependencies
 }
