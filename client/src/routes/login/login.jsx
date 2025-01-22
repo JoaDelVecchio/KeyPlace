@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../context/AuthContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
+import apiBaseUrl from "../../config/apiUrl";
 
 function Login() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function Login() {
 
       if (!username || !password) throw new Error("Missing Fields");
 
-      const response = await fetch("http://localhost:8000/api/auth/login", {
+      const response = await fetch(`${apiBaseUrl}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

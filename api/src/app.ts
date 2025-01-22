@@ -5,7 +5,7 @@ import testRouter from "./routes/testRoute";
 import cookieParser from "cookie-parser";
 import logger from "./middleware/logger";
 import cors from "cors";
-import { PORT } from "./config";
+import { CLIENT_ORIGIN_URL, PORT } from "./config";
 import errorHandler from "./middleware/errorHandler";
 import notFound from "./middleware/notFound";
 
@@ -17,7 +17,7 @@ app.use(logger);
 // CORS
 app.use(
   cors({
-    origin: "http://localhost:5173", // Frontend URL
+    origin: CLIENT_ORIGIN_URL, // Frontend URL
     credentials: true,
   })
 );

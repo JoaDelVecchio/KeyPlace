@@ -3,6 +3,7 @@ import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import apiBaseUrl from "../../config/apiUrl";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function ProfilePage() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/auth/logout", {
+      const response = await fetch(`${apiBaseUrl}/api/auth/logout`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         credentials: "include",

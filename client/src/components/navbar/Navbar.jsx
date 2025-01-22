@@ -41,13 +41,13 @@ function Navbar() {
           <div className="flex items-center gap-4">
             <img
               src={
-                currentUser.avatar ||
+                currentUser?.avatar ||
                 "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
               }
               alt="User"
               className="w-10 h-10 rounded-full object-cover"
             />
-            <span className="text-gray-700">{currentUser.username}</span>
+            <span className="text-gray-700">{currentUser?.username}</span>
             <Link
               to="/profile"
               className="relative px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-300"
