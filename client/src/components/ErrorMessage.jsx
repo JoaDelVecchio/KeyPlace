@@ -1,7 +1,5 @@
-import React from "react";
-
 const ErrorMessage = ({ error }) => {
-  return <div className="text-red-500">{error}</div>;
+  return <p className="text-red-500 text-sm mt-2">{error}</p>;
 };
 
 export default ErrorMessage;

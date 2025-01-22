@@ -1,5 +1,5 @@
-import Card from "../card/Card";
-import { listData } from "../../lib/dummydata";
+import Card from "./Card";
+import { listData } from "../lib/dummydata";
 
 function List() {
   return (

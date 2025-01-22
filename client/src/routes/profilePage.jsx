@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import Chat from "../../components/chat/Chat";
-import List from "../../components/list/List";
+import Chat from "../components/Chat";
+import List from "../components/List";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import apiBaseUrl from "../../config/apiUrl";
+import { AuthContext } from "../context/AuthContext";
+import apiBaseUrl from "../config/apiUrl";
 
 function ProfilePage() {
   const navigate = useNavigate();

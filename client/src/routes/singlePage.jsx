@@ -1,6 +1,6 @@
-import Slider from "../../components/slider/Slider";
-import Map from "../../components/map/Map";
-import { singlePostData, userData } from "../../lib/dummydata";
+import Slider from "../components/Slider";
+import Map from "../components/Map";
+import { singlePostData, userData } from "../lib/dummydata";
 
 function SinglePage() {
   return (

@@ -1,7 +1,7 @@
-import { listData } from "../../lib/dummydata";
-import Filter from "../../components/filter/Filter";
-import Card from "../../components/card/Card";
-import Map from "../../components/map/Map";
+import { listData } from "../lib/dummydata";
+import Filter from "../components/Filter";
+import Card from "../components/Card";
+import Map from "../components/Map";
 
 function ListPage() {
   const data = listData;

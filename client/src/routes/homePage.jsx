@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import SearchBar from "../../components/searchBar/SearchBar";
-import { AuthContext } from "../../context/AuthContext";
+import SearchBar from "../components/SearchBar";
+
 function HomePage() {
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between gap-6 p-6 bg-gray-50">

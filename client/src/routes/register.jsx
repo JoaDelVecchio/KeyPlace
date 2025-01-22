@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import ErrorMessage from "../../components/errorMessage/ErrorMessage";
-import apiBaseUrl from "../../config/apiUrl";
+import ErrorMessage from "../components/ErrorMessage";
+import apiBaseUrl from "../config/apiUrl";
 
 function Register() {
   const navigate = useNavigate();
@@ -48,18 +48,21 @@ function Register() {
           </h1>
           <input
             name="username"
+            required
             type="text"
             placeholder="Username"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             name="email"
+            required
             type="text"
             placeholder="Email"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             name="password"
+            required
             type="password"
             placeholder="Password"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"

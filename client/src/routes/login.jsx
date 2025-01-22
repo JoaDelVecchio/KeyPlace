@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { AuthContext } from "../../context/AuthContext";
-import ErrorMessage from "../../components/ErrorMessage";
-import Loading from "../../components/Loading";
-import apiBaseUrl from "../../config/apiUrl";
+import { AuthContext } from "../context/AuthContext";
+import ErrorMessage from "../components/ErrorMessage";
+import Loading from "../components/Loading";
+import apiBaseUrl from "../config/apiUrl";
 
 function Login() {
   const navigate = useNavigate();
@@ -59,12 +59,14 @@ function Login() {
           <h1 className="text-2xl font-semibold text-gray-800">Welcome back</h1>
           <input
             name="username"
+            required
             type="text"
             placeholder="Username"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             name="password"
+            required
             type="password"
             placeholder="Password"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"

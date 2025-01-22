@@ -1,11 +1,11 @@
-import HomePage from "./routes/homePage/homePage";
+import HomePage from "./routes/homePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ListPage from "./routes/listPage/listPage";
-import SinglePage from "./routes/singlePage/singlePage";
-import ProfilePage from "./routes/profilePage/profilePage";
-import Login from "./routes/login/login";
-import Register from "./routes/register/register";
-import { RequireAuth, Layout } from "./routes/layout/layout"; // Ensure this is implemented correctly
+import ListPage from "./routes/listPage";
+import SinglePage from "./routes/singlePage";
+import ProfilePage from "./routes/profilePage";
+import Login from "./routes/login";
+import Register from "./routes/register";
+import { RequireAuth, Layout } from "./routes/layout"; // Ensure this is implemented correctly
 
 function App() {
   const router = createBrowserRouter([
