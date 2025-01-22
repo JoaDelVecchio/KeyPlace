@@ -14,7 +14,7 @@ function Navbar() {
       <div className="flex items-center gap-8">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2 text-lg font-semibold">
-          <img src="/logo.png" alt="Logo" className="w-8 h-8" />
+          <img src="/logo.png" alt="Logo" className="w-16 h-16" />
           <span>KeyPlace</span>
         </a>
         {/* Navigation Links */}
