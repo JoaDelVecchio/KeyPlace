@@ -5,7 +5,6 @@ import { AuthContext } from "../../context/AuthContext";
 function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const user = true;
   const { currentUser } = useContext(AuthContext);
 
   return (
@@ -13,31 +12,31 @@ function Navbar() {
       {/* Left Section */}
       <div className="flex items-center gap-8">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2 text-lg font-semibold">
+        <Link to="/" className="flex items-center gap-2 text-lg font-semibold">
           <img src="/logo.png" alt="Logo" className="w-16 h-16" />
           <span>KeyPlace</span>
-        </a>
+        </Link>
         {/* Navigation Links */}
         <div className="hidden md:flex items-center gap-6 text-gray-700">
-          <a href="/" className="hover:text-black transition">
+          <Link to="/" className="hover:text-black transition">
             Home
-          </a>
-          <a href="/" className="hover:text-black transition">
+          </Link>
+          <Link to="/about" className="hover:text-black transition">
             About
-          </a>
-          <a href="/" className="hover:text-black transition">
+          </Link>
+          <Link to="/contact" className="hover:text-black transition">
             Contact
-          </a>
-          <a href="/" className="hover:text-black transition">
+          </Link>
+          <Link to="/agents" className="hover:text-black transition">
             Agents
-          </a>
+          </Link>
         </div>
       </div>
 
       {/* Right Section */}
       <div className="flex items-center gap-6">
         {/* User Section */}
-        {user ? (
+        {currentUser?.username ? (
           <div className="flex items-center gap-4">
             <img
               src={
@@ -60,15 +59,18 @@ function Navbar() {
           </div>
         ) : (
           <div className="flex items-center gap-4">
-            <a href="/" className="text-gray-700 hover:text-black transition">
+            <Link
+              to="/login"
+              className="text-gray-700 hover:text-black transition"
+            >
               Sign in
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/register"
               className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition"
             >
               Sign up
-            </a>
+            </Link>
           </div>
         )}
 
@@ -82,37 +84,82 @@ function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 right-0 w-2/3 h-full bg-white shadow-lg transform ${
-          open ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 md:hidden`}
-      >
-        <div className="flex flex-col items-start p-6 space-y-6 text-gray-700">
-          <a href="/" className="hover:text-black transition">
-            Home
-          </a>
-          <a href="/" className="hover:text-black transition">
-            About
-          </a>
-          <a href="/" className="hover:text-black transition">
-            Contact
-          </a>
-          <a href="/" className="hover:text-black transition">
-            Agents
-          </a>
-          {!user && (
-            <>
-              <a href="/" className="hover:text-black transition">
-                Sign in
-              </a>
-              <a
-                href="/"
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition"
+      <div>
+        {/* Backdrop */}
+        {open && (
+          <div
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          ></div>
+        )}
+
+        {/* Mobile Menu */}
+        <div
+          className={`fixed top-0 right-0 w-full md:w-2/3 h-full bg-white shadow-lg transform ${
+            open ? "translate-x-0" : "translate-x-full"
+          } transition-transform duration-300 ease-in-out z-50`}
+          aria-hidden={!open}
+        >
+          <div className="flex flex-col h-full">
+            {/* Close Button */}
+            <button
+              onClick={() => setOpen(false)}
+              className="self-end p-4 text-gray-700 hover:text-black transition"
+              aria-label="Close menu"
+            >
+              &#x2715;
+            </button>
+
+            {/* Menu Links */}
+            <div className="flex flex-col items-start p-6 space-y-6 text-gray-700">
+              <Link
+                to="/"
+                className="text-lg font-medium hover:text-black transition"
+                onClick={() => setOpen(false)}
               >
-                Sign up
-              </a>
-            </>
-          )}
+                Home
+              </Link>
+              <Link
+                to="/about"
+                className="text-lg font-medium hover:text-black transition"
+                onClick={() => setOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                to="/contact"
+                className="text-lg font-medium hover:text-black transition"
+                onClick={() => setOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link
+                to="/agents"
+                className="text-lg font-medium hover:text-black transition"
+                onClick={() => setOpen(false)}
+              >
+                Agents
+              </Link>
+              {!currentUser && (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-lg font-medium hover:text-black transition"
+                    onClick={() => setOpen(false)}
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="px-4 py-2 text-lg font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition"
+                    onClick={() => setOpen(false)}
+                  >
+                    Sign up
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </nav>

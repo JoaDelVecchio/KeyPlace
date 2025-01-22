@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import Navbar from "../../components/navbar/Navbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
-function Layout() {
+export const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar Section */}
@@ -15,6 +17,22 @@ function Layout() {
       </main>
     </div>
   );
-}
+};
+export const RequireAuth = () => {
+  const { currentUser } = useContext(AuthContext);
+  return !currentUser ? (
+    <Navigate to="/login" />
+  ) : (
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar Section */}
+      <header className="sticky top-0 z-50">
+        <Navbar />
+      </header>
 
-export default Layout;
+      {/* Content Section */}
+      <main className="flex-1 p-6 bg-gray-50">
+        <Outlet />
+      </main>
+    </div>
+  );
+};

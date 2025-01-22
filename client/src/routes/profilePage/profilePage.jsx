@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import { useNavigate } from "react-router-dom";
@@ -24,13 +24,14 @@ function ProfilePage() {
       const data = await response.json();
       console.log(data.message);
 
-      localStorage.removeItem("user");
+      updateUser(null);
       navigate("/");
     } catch (error) {
       console.error(error.message);
       setError(error.message);
     }
   };
+
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
       {/* Details Section */}
@@ -49,7 +50,7 @@ function ProfilePage() {
               <span className="font-medium">Avatar:</span>
               <img
                 src={
-                  currentUser.avatar ||
+                  currentUser?.avatar ||
                   "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
                 }
                 alt="Avatar"
@@ -58,12 +59,13 @@ function ProfilePage() {
             </div>
             <p>
               <span className="font-medium">Username:</span>{" "}
-              <b>{currentUser.username}</b>
+              <b>{currentUser?.username}</b>
             </p>
             <p>
               <span className="font-medium">E-mail:</span>{" "}
-              <b>{currentUser.email}</b>
+              <b>{currentUser?.email}</b>
             </p>
+
             <button
               className="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-300"
               onClick={handleLogout}
