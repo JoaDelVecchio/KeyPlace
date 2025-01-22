@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 function ProfilePage() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const { currentUser, updateUser } = useContext(AuthContext);
+
   const handleLogout = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/auth/logout", {
@@ -24,7 +27,7 @@ function ProfilePage() {
       navigate("/");
     } catch (error) {
       console.error(error.message);
-      setError(errosr.message);
+      setError(error.message);
     }
   };
   return (
@@ -44,16 +47,21 @@ function ProfilePage() {
             <div className="flex items-center gap-4">
               <span className="font-medium">Avatar:</span>
               <img
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src={
+                  currentUser.avatar ||
+                  "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                }
                 alt="Avatar"
                 className="w-16 h-16 rounded-full object-cover"
               />
             </div>
             <p>
-              <span className="font-medium">Username:</span> <b>John Doe</b>
+              <span className="font-medium">Username:</span>{" "}
+              <b>{currentUser.username}</b>
             </p>
             <p>
-              <span className="font-medium">E-mail:</span> <b>john@gmail.com</b>
+              <span className="font-medium">E-mail:</span>{" "}
+              <b>{currentUser.email}</b>
             </p>
             <button
               className="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-300"

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
 
   const user = true;
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <nav className="flex items-center justify-between p-4 bg-white shadow-md">
@@ -38,11 +40,14 @@ function Navbar() {
         {user ? (
           <div className="flex items-center gap-4">
             <img
-              src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={
+                currentUser.avatar ||
+                "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+              }
               alt="User"
               className="w-10 h-10 rounded-full object-cover"
             />
-            <span className="text-gray-700">John Doe</span>
+            <span className="text-gray-700">{currentUser.username}</span>
             <Link
               to="/profile"
               className="relative px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-300"
