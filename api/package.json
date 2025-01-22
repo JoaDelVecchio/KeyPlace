@@ -18,7 +18,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn src/app.ts",
     "build": "npm install --include=dev && tsc",
-    "start": "node dist/app.js"
+    "start": "node dist/app.js",
+    "postinstall": "prisma generate --schema=src/prisma/schema.prisma"
   },
   "devDependencies": {
     "@types/colors": "^1.2.4",
