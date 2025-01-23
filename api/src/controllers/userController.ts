@@ -55,14 +55,17 @@ export const updateUser = async (
     hashedPassword = await bcrypt.hash(password, 10);
   }
 
+  // Construct the update data, ignoring undefined fields
+  const updatedData = {
+    ...(Object.keys(inputs).length > 0 && inputs),
+    ...(password && { password: hashedPassword }),
+    ...(avatar && { avatar }),
+  };
+
   try {
     const updatedUser = await prisma.user.update({
       where: { id },
-      data: {
-        ...inputs,
-        ...(hashedPassword && { password: hashedPassword }),
-        ...(avatar && { avatar }),
-      },
+      data: updatedData,
     });
 
     console.log("Updated User:", updatedUser);

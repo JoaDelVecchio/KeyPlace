@@ -18,7 +18,17 @@ function ProfileUpdatePage() {
     const formData = new FormData(e.target);
 
     const formUserData = Object.fromEntries(formData.entries());
-    const formDataAndAvatar = { ...formUserData, avatar };
+    //Filter empty values
+    const formUserDataFiltered = Object.fromEntries(
+      Object.entries(formUserData).filter(
+        ([_, value]) => value !== "" && value !== null && value !== undefined
+      )
+    );
+    console.log("FormuserDataFiltered:", formUserDataFiltered);
+
+    const formDataAndAvatar = { ...formUserDataFiltered, avatar };
+
+    console.log("Form data and avatar", formDataAndAvatar);
     try {
       setLoading(true);
       setError(null);
