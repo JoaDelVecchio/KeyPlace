@@ -12,7 +12,7 @@ export const Layout = () => {
       </header>
 
       {/* Content Section */}
-      <main className="flex-1 p-6 bg-gray-50">
+      <main className="flex-1 bg-gray-50">
         <Outlet />
       </main>
     </div>
@@ -30,7 +30,7 @@ export const RequireAuth = () => {
       </header>
 
       {/* Content Section */}
-      <main className="flex-1 p-6 bg-gray-50">
+      <main className="flex-1 bg-gray-50">
         <Outlet />
       </main>
     </div>

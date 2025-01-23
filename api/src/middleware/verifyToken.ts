@@ -11,7 +11,6 @@ const verifyToken = (
 ) => {
   try {
     const token = req.cookies.token;
-
     if (!token) {
       throw new AppError("You are not authenticated", 401);
     }

@@ -1,5 +1,7 @@
+import { UserAuthInfoRequest } from "@/types/express";
 import AppError from "../lib/AppError";
 import prisma from "../lib/prisma";
+import bcrypt from "bcrypt";
 import { NextFunction, Request, Response } from "express";
 
 export const getUsers = async (
@@ -36,19 +38,34 @@ export const getUser = async (
 };
 
 export const updateUser = async (
-  req: Request,
+  req: UserAuthInfoRequest,
   res: Response,
   next: NextFunction
 ) => {
-  try {
-    const id = req.params.id;
+  const id = req.params.id;
+  const tokenUserId = req.userId;
+  const { password, avatar, ...inputs } = req.body;
 
+  if (id !== tokenUserId)
+    throw new AppError("Failed to update token, Not Authorized", 403);
+
+  let hashedPassword = null;
+
+  if (password) {
+    hashedPassword = await bcrypt.hash(password, 10);
+  }
+
+  try {
     const updatedUser = await prisma.user.update({
       where: { id },
-      data: req.body,
+      data: {
+        ...inputs,
+        ...(hashedPassword && { password: hashedPassword }),
+        ...(avatar && { avatar }),
+      },
     });
 
-    console.log("Updated User:", updateUser);
+    console.log("Updated User:", updatedUser);
     res.status(200).json(updatedUser);
   } catch (error) {
     next(error);
@@ -56,13 +73,16 @@ export const updateUser = async (
 };
 
 export const deleteUser = async (
-  req: Request,
+  req: UserAuthInfoRequest,
   res: Response,
   next: NextFunction
 ) => {
-  try {
-    const id = req.params.id;
+  const id = req.params.id;
+  const tokenUserId = req.userId;
 
+  if (id !== tokenUserId)
+    throw new AppError("Failed to update token, Not Authorized", 403);
+  try {
     const deletedUser = await prisma.user.delete({ where: { id } });
 
     console.log("User deleted succesfully", deleteUser);

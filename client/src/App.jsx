@@ -5,42 +5,48 @@ import SinglePage from "./routes/singlePage";
 import ProfilePage from "./routes/profilePage";
 import Login from "./routes/login";
 import Register from "./routes/register";
-import { RequireAuth, Layout } from "./routes/layout"; // Ensure this is implemented correctly
+import { RequireAuth, Layout } from "./routes/layout";
+import ProfileUpdatePage from "./routes/profileUpdatePage";
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Layout />, // Main Layout for the app
+      path: "/", // Main Layout
+      element: <Layout />,
       children: [
         {
-          path: "/",
-          element: <HomePage />, // Home Page
+          path: "/", // Public Route
+          element: <HomePage />,
         },
         {
-          path: "/list",
-          element: <ListPage />, // List Page
+          path: "/list", // Public Route
+          element: <ListPage />,
         },
         {
-          path: "/:id",
-          element: <SinglePage />, // Single Page with dynamic ID
+          path: "/:id", // Public Route with Dynamic ID
+          element: <SinglePage />,
         },
         {
-          path: "/login",
-          element: <Login />, // Login Page
+          path: "/login", // Login Page
+          element: <Login />,
         },
         {
-          path: "/register",
-          element: <Register />, // Register Page
+          path: "/register", // Register Page
+          element: <Register />,
+        },
+      ],
+    },
+    {
+      // Protected Routes Wrapper
+      element: <RequireAuth />,
+      children: [
+        {
+          path: "/profile", // Profile Page (protected)
+          element: <ProfilePage />,
         },
         {
-          element: <RequireAuth />, // Wrapper for protected routes
-          children: [
-            {
-              path: "/profile",
-              element: <ProfilePage />, // Profile Page (protected)
-            },
-          ],
+          path: "/profile/update", // Profile Update Page (protected)
+          element: <ProfileUpdatePage />,
         },
       ],
     },
